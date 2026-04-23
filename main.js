@@ -1,47 +1,64 @@
-let tabs = [{ title: "New Tab", url: "home" }];
+let tabs = [{ title: "New Tab", url: "home", icon: "🎧" }];
 let currentTab = 0;
 
-/* ---------------- UI ---------------- */
+/* ---------------- APP ---------------- */
 
 function renderBrowser() {
   const dash = document.getElementById("dashboard");
 
   dash.innerHTML = `
-    <div class="browser">
+    <div class="app">
 
-      <!-- SIDEBAR -->
-      <div class="sidebar">
-        <div class="logo">M</div>
-        <div class="sideIcon" onclick="openQuick('youtube')">▶</div>
-        <div class="sideIcon" onclick="openQuick('github')">🐙</div>
-        <div class="sideIcon" onclick="openQuick('reddit')">🔥</div>
-      </div>
+      <!-- TOP BAR -->
+      <div class="topbar">
 
-      <div class="main">
-
-        <!-- TOP -->
-        <div class="topbar">
-          <div class="tabs" id="tabs"></div>
-
-          <div class="nav">
-            <button onclick="back()">←</button>
-            <button onclick="forward()">→</button>
-
-            <input id="url" placeholder="Search or enter URL">
-
-            <button onclick="go()">Go</button>
-          </div>
+        <div class="brand" onclick="toggleMenu()">
+          <span class="mas">MAS</span><span class="rama">RAMA</span>
         </div>
 
-        <div id="view"></div>
+        <div class="nav">
+          <button>←</button>
+          <button>→</button>
 
+          <input id="url" placeholder="Search Google or enter URL">
+
+          <button onclick="go()">Go</button>
+        </div>
+
+      </div>
+
+      <!-- TABS BAR (UNDER SEARCH) -->
+      <div class="tabs" id="tabs"></div>
+
+      <!-- CLOCK -->
+      <div class="hero">
+        <div class="clock">
+          <span id="time"></span><small id="ampm"></small>
+        </div>
+        <div class="date" id="date"></div>
+      </div>
+
+      <!-- VIEW -->
+      <div id="view"></div>
+
+      <!-- MENU -->
+      <div id="menu" class="menu hidden">
+        <div onclick="alert('History')">📜 History</div>
+        <div onclick="alert('Settings')">⚙️ Settings</div>
       </div>
 
     </div>
   `;
 
   renderTabs();
+  startClock();
   loadPage();
+}
+
+/* ---------------- BRAND MENU ---------------- */
+
+function toggleMenu() {
+  document.getElementById("menu").classList.toggle("hidden");
 }
 
 /* ---------------- TABS ---------------- */
@@ -53,50 +70,31 @@ function renderTabs() {
   tabs.forEach((t, i) => {
     const tab = document.createElement("div");
     tab.className = "tab" + (i === currentTab ? " active" : "");
-    tab.innerText = t.title;
+
+    tab.innerHTML = `${t.icon} ${t.title}`;
 
     tab.onclick = () => {
       currentTab = i;
       renderTabs();
-      animateSwitch();
       loadPage();
     };
 
-    // 👀 HOVER PREVIEW
-    tab.onmouseenter = (e) => showPreview(e, t);
-    tab.onmouseleave = hidePreview;
-
     el.appendChild(tab);
   });
-
-  const add = document.createElement("div");
-  add.className = "tab add";
-  add.innerText = "+";
-  add.onclick = newTab;
-
-  el.appendChild(add);
-}
-
-function newTab() {
-  tabs.push({ title: "New Tab", url: "home" });
-  currentTab = tabs.length - 1;
-  renderTabs();
-  loadPage();
 }
 
 /* ---------------- NAV ---------------- */
 
-function format(input) {
-  if (input.startsWith("http")) return input;
-  if (input.includes(".")) return "https://" + input;
-  return "https://duckduckgo.com/?q=" + encodeURIComponent(input);
-}
-
 function go() {
   let val = document.getElementById("url").value;
-  let url = format(val);
 
-  tabs[currentTab] = { title: val, url };
+  let url = val.includes(".")
+    ? "https://" + val
+    : "https://duckduckgo.com/?q=" + encodeURIComponent(val);
+
+  tabs[currentTab].url = url;
+  tabs[currentTab].title = val;
+
   renderTabs();
   loadPage();
 }
@@ -107,82 +105,37 @@ function loadPage() {
   const view = document.getElementById("view");
   const tab = tabs[currentTab];
 
-  view.classList.remove("fadeIn");
-  void view.offsetWidth;
-  view.classList.add("fadeIn");
-
   if (tab.url === "home") {
-    view.innerHTML = `
-      <div class="home">
-        <div class="clock" id="clock"></div>
-
-        <div class="greeting">
-          Good Morning, <span>Explorer</span>
-        </div>
-
-        <div class="date" id="date"></div>
-
-        <div class="divider"></div>
-
-        <div class="searchBox">
-          <input placeholder="Search..."
-          onkeydown="if(event.key==='Enter'){goFromHome(this.value)}">
-        </div>
-      </div>
-    `;
-
-    startPerfectClock();
+    view.innerHTML = "";
     return;
   }
 
-  view.innerHTML = `
-    <iframe src="${tab.url}" class="frame"></iframe>
-  `;
+  view.innerHTML = `<iframe src="${tab.url}" class="frame"></iframe>`;
 }
 
-/* ---------------- SIDEBAR QUICK ---------------- */
+/* ---------------- CLOCK ---------------- */
 
-function openQuick(site) {
-  let urls = {
-    youtube: "https://youtube.com",
-    github: "https://github.com",
-    reddit: "https://reddit.com"
-  };
+function startClock() {
+  function update() {
+    const now = new Date();
 
-  tabs[currentTab] = {
-    title: site,
-    url: urls[site]
-  };
+    let hours = now.getHours();
+    let minutes = now.getMinutes().toString().padStart(2, "0");
 
-  renderTabs();
-  loadPage();
-}
+    let ampm = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12 || 12;
 
-/* ---------------- ANIMATION ---------------- */
+    document.getElementById("time").innerText =
+      `${hours}:${minutes}`;
 
-function animateSwitch() {
-  document.getElementById("view").style.opacity = 0.5;
-  setTimeout(() => {
-    document.getElementById("view").style.opacity = 1;
-  }, 150);
-}
+    document.getElementById("ampm").innerText = ampm;
 
-/* ---------------- PREVIEW ---------------- */
+    document.getElementById("date").innerText =
+      now.toDateString();
+  }
 
-function showPreview(e, tab) {
-  let preview = document.createElement("div");
-  preview.id = "preview";
-  preview.innerText = tab.url;
-
-  preview.style.top = (e.clientY + 10) + "px";
-  preview.style.left = (e.clientX + 10) + "px";
-
-  document.body.appendChild(preview);
-}
-
-function hidePreview() {
-  let p = document.getElementById("preview");
-  if (p) p.remove();
+  update();
+  setInterval(update, 1000);
 }
 
 /* ---------------- INIT ---------------- */
