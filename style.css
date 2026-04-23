@@ -83,3 +83,73 @@ body {
   box-shadow: var(--glow);
   transform: translateY(-5px);
 }
+
+/* TOP BAR */
+.topbar {
+  display: flex;
+  flex-direction: column;
+}
+
+/* TABS ROW */
+.tabs {
+  display: flex;
+  gap: 8px;
+  padding: 10px;
+}
+
+/* TAB */
+.tab {
+  padding: 8px 14px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.tab:hover {
+  box-shadow: 0 0 10px #ff2fdc;
+}
+
+.tab.active {
+  background: rgba(255,255,255,0.1);
+  box-shadow: 0 0 12px #ff2fdc;
+}
+
+/* PLUS TAB */
+.tab.add {
+  font-weight: bold;
+}
+
+/* NAV BAR */
+.nav {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+}
+
+.nav input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  background: rgba(255,255,255,0.05);
+  color: white;
+}
+
+/* VIEW */
+#view {
+  height: calc(100vh - 120px);
+}
+
+/* IFRAME */
+.frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* BLOCKED SCREEN */
+.blocked {
+  text-align: center;
+  padding: 50px;
+}
