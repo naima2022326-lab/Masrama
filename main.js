@@ -1,31 +1,43 @@
-let tabs = [
-  { title: "New Tab", url: "home" }
-];
-
+let tabs = [{ title: "New Tab", url: "home" }];
 let currentTab = 0;
 
-/* ---------------- UI BUILD ---------------- */
+/* ---------------- UI ---------------- */
 
 function renderBrowser() {
   const dash = document.getElementById("dashboard");
 
   dash.innerHTML = `
-    <div class="topbar">
+    <div class="browser">
 
-      <div class="tabs" id="tabs"></div>
+      <!-- SIDEBAR -->
+      <div class="sidebar">
+        <div class="logo">M</div>
+        <div class="sideIcon" onclick="openQuick('youtube')">▶</div>
+        <div class="sideIcon" onclick="openQuick('github')">🐙</div>
+        <div class="sideIcon" onclick="openQuick('reddit')">🔥</div>
+      </div>
 
-      <div class="nav">
-        <button onclick="back()">←</button>
-        <button onclick="forward()">→</button>
+      <div class="main">
 
-        <input id="url" placeholder="Search or enter URL">
+        <!-- TOP -->
+        <div class="topbar">
+          <div class="tabs" id="tabs"></div>
 
-        <button onclick="go()">Go</button>
+          <div class="nav">
+            <button onclick="back()">←</button>
+            <button onclick="forward()">→</button>
+
+            <input id="url" placeholder="Search or enter URL">
+
+            <button onclick="go()">Go</button>
+          </div>
+        </div>
+
+        <div id="view"></div>
+
       </div>
 
     </div>
-
-    <div id="view"></div>
   `;
 
   renderTabs();
@@ -46,13 +58,17 @@ function renderTabs() {
     tab.onclick = () => {
       currentTab = i;
       renderTabs();
+      animateSwitch();
       loadPage();
     };
+
+    // 👀 HOVER PREVIEW
+    tab.onmouseenter = (e) => showPreview(e, t);
+    tab.onmouseleave = hidePreview;
 
     el.appendChild(tab);
   });
 
-  // ➕ PLUS BUTTON
   const add = document.createElement("div");
   add.className = "tab add";
   add.innerText = "+";
@@ -68,7 +84,7 @@ function newTab() {
   loadPage();
 }
 
-/* ---------------- NAVIGATION ---------------- */
+/* ---------------- NAV ---------------- */
 
 function format(input) {
   if (input.startsWith("http")) return input;
@@ -77,35 +93,27 @@ function format(input) {
 }
 
 function go() {
-  let input = document.getElementById("url").value;
-  let url = format(input);
+  let val = document.getElementById("url").value;
+  let url = format(val);
 
-  tabs[currentTab].url = url;
-  tabs[currentTab].title = input;
-
+  tabs[currentTab] = { title: val, url };
   renderTabs();
   loadPage();
 }
 
-function back() {
-  alert("Back (history system next step)");
-}
-
-function forward() {
-  alert("Forward (history system next step)");
-}
-
-/* ---------------- RENDER ENGINE ---------------- */
+/* ---------------- RENDER ---------------- */
 
 function loadPage() {
   const view = document.getElementById("view");
   const tab = tabs[currentTab];
 
-  // 🏠 HOME DASHBOARD
+  view.classList.remove("fadeIn");
+  void view.offsetWidth;
+  view.classList.add("fadeIn");
+
   if (tab.url === "home") {
     view.innerHTML = `
       <div class="home">
-
         <div class="clock" id="clock"></div>
 
         <div class="greeting">
@@ -117,51 +125,64 @@ function loadPage() {
         <div class="divider"></div>
 
         <div class="searchBox">
-          <input placeholder="Search Google or enter URL"
+          <input placeholder="Search..."
           onkeydown="if(event.key==='Enter'){goFromHome(this.value)}">
         </div>
-
       </div>
     `;
 
-    if (typeof startPerfectClock === "function") {
-      startPerfectClock();
-    }
-
+    startPerfectClock();
     return;
   }
 
-  // 🌐 TRY LOAD SITE
   view.innerHTML = `
     <iframe src="${tab.url}" class="frame"></iframe>
   `;
-
-  // ⚠️ fallback after 2s if blocked
-  setTimeout(() => {
-    try {
-      const iframe = document.querySelector(".frame");
-
-      // if still blank or blocked
-      if (!iframe || iframe.contentWindow.length === 0) {
-        throw "blocked";
-      }
-    } catch {
-      view.innerHTML = `
-        <div class="blocked">
-          <h2>Site blocked inside browser</h2>
-          <p>${tab.url}</p>
-          <button onclick="window.open('${tab.url}')">
-            Open in new tab
-          </button>
-        </div>
-      `;
-    }
-  }, 2000);
 }
 
-function goFromHome(val) {
-  document.getElementById("url").value = val;
-  go();
+/* ---------------- SIDEBAR QUICK ---------------- */
+
+function openQuick(site) {
+  let urls = {
+    youtube: "https://youtube.com",
+    github: "https://github.com",
+    reddit: "https://reddit.com"
+  };
+
+  tabs[currentTab] = {
+    title: site,
+    url: urls[site]
+  };
+
+  renderTabs();
+  loadPage();
+}
+
+/* ---------------- ANIMATION ---------------- */
+
+function animateSwitch() {
+  document.getElementById("view").style.opacity = 0.5;
+  setTimeout(() => {
+    document.getElementById("view").style.opacity = 1;
+  }, 150);
+}
+
+/* ---------------- PREVIEW ---------------- */
+
+function showPreview(e, tab) {
+  let preview = document.createElement("div");
+  preview.id = "preview";
+  preview.innerText = tab.url;
+
+  preview.style.top = (e.clientY + 10) + "px";
+  preview.style.left = (e.clientX + 10) + "px";
+
+  document.body.appendChild(preview);
+}
+
+function hidePreview() {
+  let p = document.getElementById("preview");
+  if (p) p.remove();
 }
 
 /* ---------------- INIT ---------------- */
