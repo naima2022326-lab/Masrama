@@ -153,3 +153,113 @@ body {
   text-align: center;
   padding: 50px;
 }
+
+/* LAYOUT */
+.browser {
+  display: flex;
+  height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 60px;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.logo {
+  font-weight: bold;
+  color: #ff2fdc;
+  margin-bottom: 20px;
+}
+
+.sideIcon {
+  margin: 10px 0;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.sideIcon:hover {
+  color: #ff2fdc;
+  transform: scale(1.2);
+}
+
+/* MAIN */
+.main {
+  flex: 1;
+}
+
+/* TABS */
+.tabs {
+  display: flex;
+  gap: 8px;
+  padding: 10px;
+}
+
+.tab {
+  padding: 8px 16px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.05);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.tab:hover {
+  box-shadow: 0 0 10px #ff2fdc;
+}
+
+.tab.active {
+  box-shadow: 0 0 15px #ff2fdc;
+}
+
+/* NAV */
+.nav {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+}
+
+.nav input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  background: rgba(255,255,255,0.05);
+  color: white;
+}
+
+/* VIEW */
+#view {
+  height: calc(100vh - 120px);
+  transition: opacity 0.3s;
+}
+
+.frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* PREVIEW */
+#preview {
+  position: fixed;
+  background: black;
+  color: white;
+  padding: 8px;
+  border-radius: 8px;
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+/* FADE */
+.fadeIn {
+  animation: fade 0.3s;
+}
+
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
