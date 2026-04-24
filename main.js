@@ -1,150 +1,59 @@
-/* =========================
-   CLOCK (GX STYLE + AM/PM)
-========================= */
-function updateClock() {
+/* CLOCK (FIXED + AM/PM) */
+function updateClock(){
   const now = new Date();
 
   let h = now.getHours();
-  let m = now.getMinutes().toString().padStart(2, "0");
+  let m = now.getMinutes().toString().padStart(2,"0");
 
-  const ampm = h >= 12 ? "PM" : "AM";
-
+  let ampm = h >= 12 ? "PM" : "AM";
   h = h % 12 || 12;
 
-  const timeEl = document.getElementById("time");
-  const ampmEl = document.getElementById("ampm");
-  const dateEl = document.getElementById("date");
+  document.getElementById("time").textContent = `${h}:${m}`;
+  document.getElementById("ampm").textContent = ampm;
 
-  if (timeEl) timeEl.textContent = `${h}:${m}`;
-  if (ampmEl) ampmEl.textContent = ampm;
-
-  if (dateEl) {
-    dateEl.textContent = now.toLocaleDateString(undefined, {
-      weekday: "long",
-      month: "long",
-      day: "numeric"
-    });
-  }
+  document.getElementById("date").textContent =
+    now.toDateString();
 }
 
-function startClock() {
-  updateClock();
+setInterval(updateClock,1000);
+updateClock();
 
-  const delay = 60000 - (Date.now() % 60000);
-
-  setTimeout(() => {
-    updateClock();
-    setInterval(updateClock, 60000);
-  }, delay);
+/* MENU */
+function toggleMenu(){
+  const m = document.getElementById("menu");
+  m.style.display = m.style.display === "block" ? "none" : "block";
 }
-startClock();
 
-
-/* =========================
-   TABS (UNCHANGED CORE)
-========================= */
-let tabs = [{ title: "New Tab", url: "https://google.com" }];
+/* TABS */
+let tabs = [{title:"New Tab"}];
 let current = 0;
 
-function renderTabs() {
+function renderTabs(){
   const el = document.getElementById("tabs");
-  if (!el) return;
+  el.innerHTML="";
 
-  el.innerHTML = "";
-
-  tabs.forEach((t, i) => {
-    const tab = document.createElement("div");
-    tab.className = "tab" + (i === current ? " active" : "");
-
-    tab.innerHTML = `
-      <span class="tabTitle">${t.title}</span>
-      <span class="tabClose">×</span>
-    `;
-
-    tab.onclick = (e) => {
-      if (e.target.classList.contains("tabClose")) return;
-      current = i;
-      renderTabs();
-    };
-
-    tab.querySelector(".tabClose").onclick = (e) => {
-      e.stopPropagation();
-      tabs.splice(i, 1);
-
-      if (tabs.length === 0) {
-        tabs.push({ title: "New Tab", url: "https://google.com" });
-      }
-
-      current = Math.max(0, current - 1);
-      renderTabs();
-    };
-
-    el.appendChild(tab);
+  tabs.forEach((t,i)=>{
+    const d=document.createElement("div");
+    d.className="tab"+(i===current?" active":"");
+    d.textContent=t.title;
+    d.onclick=()=>{current=i;renderTabs();}
+    el.appendChild(d);
   });
-
-  const add = document.createElement("div");
-  add.className = "tab add";
-  add.textContent = "+";
-
-  add.onclick = () => {
-    tabs.push({ title: "New Tab", url: "https://google.com" });
-    current = tabs.length - 1;
-    renderTabs();
-  };
-
-  el.appendChild(add);
 }
 
 renderTabs();
 
+/* NAV */
+function go(){
+  const val=document.getElementById("search").value;
 
-/* =========================
-   SEARCH
-========================= */
-function go() {
-  const input = document.getElementById("search");
-  let val = input.value.trim();
+  let url = val.includes(".")
+    ? "https://"+val
+    : "https://www.google.com/search?q="+encodeURIComponent(val);
 
-  if (!val) return;
-
-  let url;
-
-  if (val.startsWith("http")) {
-    url = val;
-  } else if (val.includes(".")) {
-    url = "https://" + val;
-  } else {
-    url = "https://www.google.com/search?q=" + encodeURIComponent(val);
-  }
-
-  window.open(url, "_blank");
+  document.getElementById("frame").src=url;
 }
 
-
-/* =========================
-   MASRAMA MENU (CLEAN)
-========================= */
-function toggleHistory() {
-  let existing = document.getElementById("masramaMenu");
-
-  if (existing) {
-    existing.remove();
-    return;
-  }
-
-  const menu = document.createElement("div");
-  menu.id = "masramaMenu";
-
-  menu.innerHTML = `
-    <div class="menuItem">History</div>
-    <div class="menuItem">Bookmarks</div>
-    <div class="menuItem">Appearance</div>
-    <div class="menuItem">Settings</div>
-    <div class="menuItem login">🔐 Login</div>
-  `;
-
-  document.body.appendChild(menu);
-
-  menu.style.top = "55px";
-  menu.style.left = "20px";
-}
+function back(){history.back();}
+function forward(){history.forward();}
+function reload(){location.reload();}
