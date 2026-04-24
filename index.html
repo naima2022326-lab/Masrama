@@ -4,109 +4,117 @@
   <title>Masrama</title>
 
   <link rel="stylesheet" href="style.css">
-
-  <!-- FAVICON -->
   <link rel="icon" href="assets/logo.png">
 
+  <!-- FONT (closer to GX style) -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
 <div class="app">
 
-  <!-- TOP -->
+  <!-- 🔥 TOP BAR (TABS + URL SAME LINE) -->
   <div class="topbar">
 
-    <div class="tabs" id="tabs"></div>
+    <div class="left">
+      <div class="logo">MAS<span>RAMA</span></div>
 
-    <div class="nav">
-      <button>←</button>
-      <button>→</button>
-      <button>⟳</button>
+      <button class="navBtn">←</button>
+      <button class="navBtn">→</button>
+      <button class="navBtn">⟳</button>
+    </div>
+
+    <div class="center">
+      <div class="tabs" id="tabs"></div>
 
       <input id="search" placeholder="Search Google or enter URL...">
+    </div>
 
-      <button onclick="go()">Go</button>
+    <div class="right">
+      <button class="iconBtn">⏱</button>
+      <button class="iconBtn">★</button>
+      <button class="iconBtn">⚙</button>
     </div>
 
   </div>
 
-  <!-- MAIN DASH -->
+  <!-- 🔥 MAIN DASH -->
   <div class="dashboard">
 
-  <!-- TOP BLOCK (already done) -->
-  <div class="timeBlock">
-    <div class="time" id="time"></div>
-    <div class="greeting">Good Morning, <span>Explorer</span></div>
-    <div class="date" id="date"></div>
-    <div class="line"></div>
-  </div>
-
-  <div class="searchBox">
-    <input placeholder="Search Google or enter a URL...">
-  </div>
-
-  <!-- APPS -->
-  <div class="apps">
-    <div class="appItem">🎮<span>Opera GX</span></div>
-    <div class="appItem">▶<span>YouTube</span></div>
-    <div class="appItem">🐙<span>GitHub</span></div>
-    <div class="appItem">🔥<span>Reddit</span></div>
-    <div class="appItem">🎵<span>Spotify</span></div>
-    <div class="appItem">💻<span>CodePen</span></div>
-  </div>
-
-  <!-- QUICK ACCESS -->
-  <div class="quick">
-
-    <div class="quickTitle">
-      🌐 QUICK ACCESS
+    <!-- TIME -->
+    <div class="timeBlock">
+      <div class="time" id="time"></div>
+      <div class="greeting">Good Morning, <span>Explorer</span></div>
+      <div class="date" id="date"></div>
+      <div class="line"></div>
     </div>
 
-    <div class="cards">
+    <!-- SEARCH -->
+    <div class="searchBox">
+      <input placeholder="Search Google or enter a URL...">
+    </div>
 
-      <div class="card">
-        <div class="cardTop">
-          <span>🎮 Opera GX</span>
-          <span class="open">↗</span>
-        </div>
-        <div class="tag">BROWSER</div>
-        <p>The gaming browser — CPU & RAM limiters, Twitch, Discord built in.</p>
-      </div>
+    <!-- APPS -->
+    <div class="apps">
+      <div class="appItem">🎮<span>Opera GX</span></div>
+      <div class="appItem">▶<span>YouTube</span></div>
+      <div class="appItem">🐙<span>GitHub</span></div>
+      <div class="appItem">🔥<span>Reddit</span></div>
+      <div class="appItem">🎵<span>Spotify</span></div>
+      <div class="appItem">💻<span>CodePen</span></div>
+    </div>
 
-      <div class="card">
-        <div class="cardTop">
-          <span>📈 Trending</span>
-          <span class="open">↗</span>
-        </div>
-        <div class="tag">TRENDS</div>
-        <p>Live trending topics and searches from across the internet.</p>
-      </div>
+    <!-- QUICK ACCESS -->
+    <div class="quick">
 
-      <div class="card">
-        <div class="cardTop">
-          <span>📰 Hacker News</span>
-          <span class="open">↗</span>
-        </div>
-        <div class="tag">NEWS</div>
-        <p>Top tech and startup stories curated by the community.</p>
-      </div>
+      <div class="quickTitle">🌐 QUICK ACCESS</div>
 
-      <div class="card">
-        <div class="cardTop">
-          <span>⚡ Speed Test</span>
-          <span class="open">↗</span>
+      <div class="cards">
+
+        <div class="card">
+          <div class="cardTop">
+            <span>🎮 Opera GX</span>
+            <span class="open">↗</span>
+          </div>
+          <div class="tag">BROWSER</div>
+          <p>The gaming browser — CPU & RAM limiters, Twitch, Discord built in.</p>
         </div>
-        <div class="tag">TOOLS</div>
-        <p>Check your internet speed instantly — powered by Fast.com.</p>
+
+        <div class="card">
+          <div class="cardTop">
+            <span>📈 Trending</span>
+            <span class="open">↗</span>
+          </div>
+          <div class="tag">TRENDS</div>
+          <p>Live trending topics and searches from across the internet.</p>
+        </div>
+
+        <div class="card">
+          <div class="cardTop">
+            <span>📰 Hacker News</span>
+            <span class="open">↗</span>
+          </div>
+          <div class="tag">NEWS</div>
+          <p>Top tech and startup stories curated by the community.</p>
+        </div>
+
+        <div class="card">
+          <div class="cardTop">
+            <span>⚡ Speed Test</span>
+            <span class="open">↗</span>
+          </div>
+          <div class="tag">TOOLS</div>
+          <p>Check your internet speed instantly — powered by Fast.com.</p>
+        </div>
+
       </div>
 
     </div>
 
-  </div>
+    <div class="footer">POWERED BY MASRAMA</div>
 
-  <!-- FOOTER -->
-  <div class="footer">POWERED BY MASRAMA</div>
+  </div>
 
 </div>
 
@@ -131,30 +139,6 @@
     <div class="bar"><div style="width:50%"></div></div>
     <span>41MB/s</span>
   </div>
-</div>
-
-    <div class="timeBlock">
-      <div class="time" id="time"></div>
-      <div class="greeting">Good Morning, <span>Explorer</span></div>
-      <div class="date" id="date"></div>
-      <div class="line"></div>
-    </div>
-
-    <div class="searchBox">
-      <input placeholder="Search Google or enter a URL...">
-    </div>
-
-    <div class="apps">
-      <div class="appItem">🎮<span>Opera GX</span></div>
-      <div class="appItem">▶<span>YouTube</span></div>
-      <div class="appItem">🐙<span>GitHub</span></div>
-      <div class="appItem">🔥<span>Reddit</span></div>
-      <div class="appItem">🎵<span>Spotify</span></div>
-      <div class="appItem">💻<span>CodePen</span></div>
-    </div>
-
-  </div>
-
 </div>
 
 <script src="main.js"></script>
