@@ -6,7 +6,6 @@
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="assets/logo.png">
 
-  <!-- FONT (closer to GX style) -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
@@ -14,70 +13,55 @@
 
 <div class="app">
 
-  <!-- 🔥 TOP BAR (TABS + URL SAME LINE) -->
- <div class="topbar">
+  <!-- ✅ CLEAN TOP BAR -->
+  <div class="topbar">
 
-  <div class="tabs" id="tabs"></div>
-
-  <div class="nav">
-
-    <div class="navBtns">
-      <button>←</button>
-      <button>→</button>
-      <button>⟳</button>
+    <!-- LOGO (click = history) -->
+    <div class="logo" onclick="toggleHistory()">
+      MAS<span>RAMA</span>
     </div>
 
-    <input id="search" placeholder="Search Google or enter URL...">
+    <!-- TABS -->
+    <div class="tabs" id="tabs"></div>
 
-    <div class="navIcons">
-      <button>⏱</button>
-      <button>★</button>
-      <button>⚙</button>
-    </div>
+    <!-- NAV + SEARCH -->
+    <div class="nav">
 
-  </div>
-
-</div>
-
-    <div class="center">
-      <div class="tabs" id="tabs"></div>
+      <button class="navBtn">←</button>
+      <button class="navBtn">→</button>
+      <button class="navBtn">⟳</button>
 
       <input id="search" placeholder="Search Google or enter URL...">
-    </div>
 
-    <div class="right">
-      <button class="iconBtn">⏱</button>
-      <button class="iconBtn">★</button>
-      <button class="iconBtn">⚙</button>
     </div>
 
   </div>
 
-  <!-- 🔥 MAIN DASH -->
+  <!-- DASHBOARD -->
   <div class="dashboard">
 
     <!-- TIME -->
-   <div class="timeBlock">
-  <div class="time" id="time"></div>
+    <div class="timeBlock">
+      <div class="time" id="time"></div>
 
-  <div class="greeting">
-    Good Morning, <span>Explorer</span>
-  </div>
+      <div class="greeting">
+        Good Morning, <span>Explorer</span>
+      </div>
 
-  <div class="date" id="date"></div>
+      <div class="date" id="date"></div>
 
-  <div class="divider">
-    <span></span>
-    <div class="dot"></div>
-    <span></span>
-  </div>
+      <div class="divider">
+        <span></span>
+        <div class="dot"></div>
+        <span></span>
+      </div>
 
-  <div class="thanks">
-    Thank you Muna Jama & Nasra Diriye  BUTTT speical thanx to our owner Naima Mohamed
-  </div>
-</div>
+      <div class="thanks">
+        Thank you Muna Jama & Nasra Diriye — special thanks to Naima Mohamed
+      </div>
+    </div>
 
-    <!-- SEARCH -->
+    <!-- CENTER SEARCH -->
     <div class="searchBox">
       <input placeholder="Search Google or enter a URL...">
     </div>
@@ -94,7 +78,6 @@
 
     <!-- QUICK ACCESS -->
     <div class="quick">
-
       <div class="quickTitle">🌐 QUICK ACCESS</div>
 
       <div class="cards">
@@ -105,7 +88,7 @@
             <span class="open">↗</span>
           </div>
           <div class="tag">BROWSER</div>
-          <p>The gaming browser — CPU & RAM limiters, Twitch, Discord built in.</p>
+          <p>The gaming browser — CPU & RAM tools built in.</p>
         </div>
 
         <div class="card">
@@ -114,7 +97,7 @@
             <span class="open">↗</span>
           </div>
           <div class="tag">TRENDS</div>
-          <p>Live trending topics and searches from across the internet.</p>
+          <p>Live trending searches across the internet.</p>
         </div>
 
         <div class="card">
@@ -123,7 +106,7 @@
             <span class="open">↗</span>
           </div>
           <div class="tag">NEWS</div>
-          <p>Top tech and startup stories curated by the community.</p>
+          <p>Top tech and startup stories.</p>
         </div>
 
         <div class="card">
@@ -132,40 +115,16 @@
             <span class="open">↗</span>
           </div>
           <div class="tag">TOOLS</div>
-          <p>Check your internet speed instantly — powered by Fast.com.</p>
+          <p>Check your internet speed instantly.</p>
         </div>
 
       </div>
-
     </div>
 
     <div class="footer">POWERED BY MASRAMA</div>
 
   </div>
 
-</div>
-
-<!-- PERFORMANCE PANEL -->
-<div class="monitor">
-  <div class="monitorTitle">MASRAMA MONITOR</div>
-
-  <div class="stat">
-    <span>CPU</span>
-    <div class="bar"><div style="width:37%"></div></div>
-    <span>37%</span>
-  </div>
-
-  <div class="stat">
-    <span>RAM</span>
-    <div class="bar"><div style="width:65%"></div></div>
-    <span>65%</span>
-  </div>
-
-  <div class="stat">
-    <span>NET</span>
-    <div class="bar"><div style="width:50%"></div></div>
-    <span>41MB/s</span>
-  </div>
 </div>
 
 <script src="main.js"></script>
