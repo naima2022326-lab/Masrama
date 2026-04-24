@@ -3,21 +3,61 @@
 <head>
   <title>Masrama</title>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="style.css">
+
+  <!-- FAVICON -->
+  <link rel="icon" href="assets/logo.png">
+
 </head>
 
 <body>
 
-<div id="app">
-  <div id="dashboard"></div>
+<div class="app">
+
+  <!-- TOP -->
+  <div class="topbar">
+
+    <div class="tabs" id="tabs"></div>
+
+    <div class="nav">
+      <button>←</button>
+      <button>→</button>
+      <button>⟳</button>
+
+      <input id="search" placeholder="Search Google or enter URL...">
+
+      <button onclick="go()">Go</button>
+    </div>
+
+  </div>
+
+  <!-- MAIN DASH -->
+  <div class="dashboard">
+
+    <div class="timeBlock">
+      <div class="time" id="time"></div>
+      <div class="greeting">Good Morning, <span>Explorer</span></div>
+      <div class="date" id="date"></div>
+      <div class="line"></div>
+    </div>
+
+    <div class="searchBox">
+      <input placeholder="Search Google or enter a URL...">
+    </div>
+
+    <div class="apps">
+      <div class="appItem">🎮<span>Opera GX</span></div>
+      <div class="appItem">▶<span>YouTube</span></div>
+      <div class="appItem">🐙<span>GitHub</span></div>
+      <div class="appItem">🔥<span>Reddit</span></div>
+      <div class="appItem">🎵<span>Spotify</span></div>
+      <div class="appItem">💻<span>CodePen</span></div>
+    </div>
+
+  </div>
+
 </div>
 
-<!-- LOAD ORDER MATTERS -->
-<script src="clock.js"></script>
 <script src="main.js"></script>
-
 </body>
 </html>
