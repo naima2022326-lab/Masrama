@@ -22,7 +22,7 @@ function updateClock() {
   }
 }
 
-/* sync EXACTLY to next minute */
+/* sync EXACTLY to minute */
 function startClock() {
   updateClock();
 
@@ -38,9 +38,12 @@ startClock();
 
 
 /* =========================
-   TABS (SMOOTH + CLEAN)
+   GX TABS (ANIMATED + PREVIEW)
 ========================= */
-let tabs = [{ title: "New Tab", icon: "🌐" }];
+let tabs = [
+  { title: "New Tab", icon: "🌐" }
+];
+
 let current = 0;
 
 function renderTabs() {
@@ -56,17 +59,23 @@ function renderTabs() {
     tab.innerHTML = `
       <span class="tabIcon">${t.icon}</span>
       <span class="tabTitle">${t.title}</span>
+      <div class="tabGlow"></div>
     `;
 
+    /* CLICK */
     tab.onclick = () => {
       current = i;
       renderTabs();
     };
 
+    /* 🔥 HOVER PREVIEW */
+    tab.onmouseenter = (e) => showPreview(e, t);
+    tab.onmouseleave = hidePreview;
+
     el.appendChild(tab);
   });
 
-  /* ADD TAB BUTTON */
+  /* ADD BUTTON */
   const add = document.createElement("div");
   add.className = "tab add";
   add.textContent = "+";
@@ -84,7 +93,47 @@ renderTabs();
 
 
 /* =========================
-   SEARCH (SMART + ENTER KEY)
+   TAB PREVIEW (GX STYLE)
+========================= */
+let preview;
+
+function showPreview(e, tabData) {
+  hidePreview();
+
+  preview = document.createElement("div");
+  preview.className = "tabPreview";
+
+  preview.innerHTML = `
+    <div class="previewContent">
+      <div class="previewTitle">${tabData.title}</div>
+      <div class="previewBox">Preview</div>
+    </div>
+  `;
+
+  document.body.appendChild(preview);
+
+  const rect = e.target.getBoundingClientRect();
+
+  preview.style.left = rect.left + "px";
+  preview.style.top = rect.bottom + 8 + "px";
+
+  /* smooth fade in */
+  requestAnimationFrame(() => {
+    preview.style.opacity = "1";
+    preview.style.transform = "translateY(0px) scale(1)";
+  });
+}
+
+function hidePreview() {
+  if (preview) {
+    preview.remove();
+    preview = null;
+  }
+}
+
+
+/* =========================
+   SEARCH (SMART + ENTER)
 ========================= */
 function go() {
   const input = document.getElementById("search");
@@ -95,7 +144,6 @@ function go() {
 
   let url;
 
-  /* detect real URL */
   if (val.startsWith("http://") || val.startsWith("https://")) {
     url = val;
   } else if (val.includes(".")) {
@@ -107,7 +155,7 @@ function go() {
   window.open(url, "_blank");
 }
 
-/* ENTER KEY SUPPORT */
+/* ENTER KEY */
 document.addEventListener("DOMContentLoaded", () => {
   const input = document.getElementById("search");
 
