@@ -490,3 +490,61 @@ body {
 .historyItem:hover {
   background: rgba(255,255,255,0.08);
 }
+
+/* CLOCK WRAP */
+.timeWrap {
+  position: relative;
+  display: inline-block;
+}
+
+/* SMALL AM/PM */
+.ampm {
+  position: absolute;
+  top: 10px;
+  right: -25px;
+
+  font-size: 14px;
+  color: #ff2fd1;
+  font-family: 'Orbitron', sans-serif;
+
+  opacity: 0.8;
+}
+
+/* MATCH CLOCK TO MASRAMA STYLE */
+.time {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+}
+
+/* MASRAMA MENU */
+#masramaMenu {
+  position: fixed;
+
+  background: rgba(20,10,30,0.95);
+  backdrop-filter: blur(12px);
+
+  border-radius: 10px;
+  padding: 10px;
+
+  width: 200px;
+  z-index: 9999;
+}
+
+/* MENU ITEMS */
+.menuItem {
+  padding: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #ccc;
+  transition: 0.2s;
+}
+
+.menuItem:hover {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+}
+
+/* LOGIN SPECIAL */
+.menuItem.login {
+  color: #ff2fd1;
+}
