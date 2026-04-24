@@ -5,53 +5,54 @@
   <title>Masrama</title>
 
   <link rel="stylesheet" href="style.css">
-
-  <!-- ICON -->
   <link rel="icon" href="assets/logo.png">
 
-  <!-- FONTS -->
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<!-- ================= TOP BAR ================= -->
-<div class="topbar" id="topbar">
+<!-- TOP BAR -->
+<div class="topbar">
 
-  <!-- LOGO (click = menu) -->
-  <div class="logo" id="logoBtn">
-    <span class="mas">MAS</span><span class="rama">RAMA</span>
-  </div>
+  <!-- LOGO + MENU -->
+  <div class="brand" id="brandBtn">
+    <span class="logoLeft">MAS</span><span class="logoRight">RAMA</span>
 
-  <!-- MENU DROPDOWN -->
-  <div class="menu" id="menu">
-    <div>History</div>
-    <div>Bookmarks</div>
-    <div>Appearance</div>
-    <div class="loginRow">
-      <img src="assets/login.png" class="loginIcon">
-      <span>Login</span>
+    <!-- dropdown -->
+    <div class="menu" id="menu">
+      <div>History</div>
+      <div>Bookmarks</div>
+      <div>Appearance</div>
+      <div class="loginRow">
+        <img src="assets/user.png" alt="login">
+        <span>Login</span>
+      </div>
     </div>
   </div>
 
-  <!-- TABS -->
-  <div class="tabs" id="tabs"></div>
-
-  <!-- SEARCH / NAV -->
+  <!-- NAV -->
   <div class="nav">
+
     <button>←</button>
     <button>→</button>
     <button>⟳</button>
 
-    <input id="search" placeholder="Search Google or enter URL...">
+    <input id="search" placeholder="Search or enter URL...">
+    <button onclick="go()">Go</button>
 
-    <!-- LOGIN ICON (top right) -->
-    <img src="assets/login.png" class="topLogin">
+  </div>
+
+  <!-- RIGHT ICON -->
+  <div class="rightIcon">
+    <img src="assets/user.png" class="userIcon">
   </div>
 
 </div>
 
-<!-- ================= DASHBOARD ================= -->
+
+<!-- MAIN -->
 <div class="dashboard">
 
   <!-- CLOCK -->
@@ -67,13 +68,9 @@
     <div class="line"></div>
   </div>
 
-  <!-- SEARCH -->
-  <div class="searchBox">
-    <input placeholder="Search Google or enter a URL...">
-  </div>
-
 </div>
 
 <script src="main.js"></script>
+
 </body>
 </html>
