@@ -11,68 +11,120 @@
 
 <body>
 
-<!-- TOP BAR -->
-<div class="topbar">
+<div class="app">
 
-  <!-- MASRAMA LOGO -->
-  <div class="brand" onclick="toggleMenu()">
-    <span class="m">MAS</span><span class="r">RAMA</span>
+  <!-- ✅ CLEAN TOP BAR -->
+  <div class="topbar">
 
-    <!-- dropdown -->
-    <div class="menu" id="menu">
-      <div>History</div>
-      <div>Bookmarks</div>
-      <div>Appearance</div>
-      <div>Settings</div>
+    <!-- LOGO (click = history) -->
+    <div class="logo" onclick="toggleHistory()">
+      MAS<span>RAMA</span>
+    </div>
 
-      <div class="login">
-        <img src="/mnt/data/file_000000003b7471fd81302dbf431b6d79" />
-        Login
+    <!-- TABS -->
+    <div class="tabs" id="tabs"></div>
+
+    <!-- NAV + SEARCH -->
+    <div class="nav">
+
+      <button class="navBtn">←</button>
+      <button class="navBtn">→</button>
+      <button class="navBtn">⟳</button>
+
+      <input id="search" placeholder="Search Google or enter URL...">
+
+    </div>
+
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="dashboard">
+
+    <!-- TIME -->
+    <div class="timeBlock">
+      <div class="time" id="time"></div>
+
+      <div class="greeting">
+        Good Morning, <span>Explorer</span>
+      </div>
+
+      <div class="date" id="date"></div>
+
+      <div class="divider">
+        <span></span>
+        <div class="dot"></div>
+        <span></span>
+      </div>
+
+      <div class="thanks">
+        Thank you Muna Jama & Nasra Diriye — special thanks to Naima Mohamed
       </div>
     </div>
+
+    <!-- CENTER SEARCH -->
+    <div class="searchBox">
+      <input placeholder="Search Google or enter a URL...">
+    </div>
+
+    <!-- APPS -->
+    <div class="apps">
+      <div class="appItem">🎮<span>Opera GX</span></div>
+      <div class="appItem">▶<span>YouTube</span></div>
+      <div class="appItem">🐙<span>GitHub</span></div>
+      <div class="appItem">🔥<span>Reddit</span></div>
+      <div class="appItem">🎵<span>Spotify</span></div>
+      <div class="appItem">💻<span>CodePen</span></div>
+    </div>
+
+    <!-- QUICK ACCESS -->
+    <div class="quick">
+      <div class="quickTitle">🌐 QUICK ACCESS</div>
+
+      <div class="cards">
+
+        <div class="card">
+          <div class="cardTop">
+            <span>🎮 Opera GX</span>
+            <span class="open">↗</span>
+          </div>
+          <div class="tag">BROWSER</div>
+          <p>The gaming browser — CPU & RAM tools built in.</p>
+        </div>
+
+        <div class="card">
+          <div class="cardTop">
+            <span>📈 Trending</span>
+            <span class="open">↗</span>
+          </div>
+          <div class="tag">TRENDS</div>
+          <p>Live trending searches across the internet.</p>
+        </div>
+
+        <div class="card">
+          <div class="cardTop">
+            <span>📰 Hacker News</span>
+            <span class="open">↗</span>
+          </div>
+          <div class="tag">NEWS</div>
+          <p>Top tech and startup stories.</p>
+        </div>
+
+        <div class="card">
+          <div class="cardTop">
+            <span>⚡ Speed Test</span>
+            <span class="open">↗</span>
+          </div>
+          <div class="tag">TOOLS</div>
+          <p>Check your internet speed instantly.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer">POWERED BY MASRAMA</div>
+
   </div>
 
-  <!-- TABS -->
-  <div class="tabs" id="tabs"></div>
-
-  <!-- NAV -->
-  <div class="nav">
-
-    <button onclick="back()">←</button>
-    <button onclick="forward()">→</button>
-    <button onclick="reload()">⟳</button>
-
-    <input id="search" placeholder="Search or enter URL...">
-    <button onclick="go()">Go</button>
-
-  </div>
-
-</div>
-
-<!-- CLOCK AREA -->
-<div class="center">
-
-  <div class="timeWrap">
-    <div class="time" id="time"></div>
-    <div class="ampm" id="ampm"></div>
-  </div>
-
-  <div class="greeting">Good Morning, <span>Explorer</span></div>
-  <div class="date" id="date"></div>
-
-</div>
-
-<!-- QUICK ICONS -->
-<div class="apps">
-  <div>🎮 Opera</div>
-  <div>▶ YouTube</div>
-  <div>🐙 GitHub</div>
-  <div>🔥 Reddit</div>
-</div>
-
-<!-- WEB PREVIEW -->
-<div class="preview">
-  <iframe id="frame" src="https://www.google.com"></iframe>
 </div>
 
 <script src="main.js"></script>
