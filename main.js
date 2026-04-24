@@ -1,4 +1,4 @@
-/* CLOCK (REAL TIME, MINUTE PERFECT) */
+/* CLOCK (SMOOTH + EXACT) */
 function updateClock() {
   const now = new Date();
 
@@ -7,8 +7,13 @@ function updateClock() {
 
   h = h % 12 || 12;
 
-  document.getElementById("time").innerText = `${h}:${m}`;
-  document.getElementById("date").innerText = now.toDateString();
+  document.getElementById("time").textContent = `${h}:${m}`;
+  document.getElementById("date").textContent =
+    now.toLocaleDateString(undefined, {
+      weekday: "long",
+      month: "long",
+      day: "numeric"
+    });
 }
 
 setInterval(updateClock, 1000);
@@ -26,8 +31,26 @@ function renderTabs() {
     const tab = document.createElement("div");
     tab.className = "tab" + (i === current ? " active" : "");
     tab.innerHTML = `${t.icon} ${t.title}`;
+
+    tab.onclick = () => {
+      current = i;
+      renderTabs();
+    };
+
     el.appendChild(tab);
   });
+
+  /* ADD + BUTTON */
+  const add = document.createElement("div");
+  add.className = "tab add";
+  add.textContent = "+";
+  add.onclick = () => {
+    tabs.push({ title: "New Tab", icon: "🌐" });
+    current = tabs.length - 1;
+    renderTabs();
+  };
+
+  el.appendChild(add);
 }
 
 renderTabs();
