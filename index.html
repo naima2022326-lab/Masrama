@@ -1,77 +1,75 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
   <title>Masrama</title>
 
   <link rel="stylesheet" href="style.css">
+
+  <!-- ICON -->
   <link rel="icon" href="assets/logo.png">
 
   <!-- FONTS -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<div class="app">
+<!-- ================= TOP BAR ================= -->
+<div class="topbar" id="topbar">
 
-  <!-- 🔥 TOP BAR -->
-  <div class="topbar" id="topbar">
-
-    <!-- MASRAMA LOGO -->
-    <div class="logo" onclick="toggleMenu()">
-      <span class="mas">MAS</span><span class="rama">RAMA</span>
-    </div>
-
-    <!-- DROPDOWN MENU -->
-    <div class="menu" id="menu">
-      <div>History</div>
-      <div>Bookmarks</div>
-      <div>Appearance</div>
-      <div class="login">
-        <img src="assets/user.png">
-        Log in
-      </div>
-    </div>
-
-    <!-- TABS -->
-    <div class="tabs" id="tabs"></div>
-
-    <!-- SEARCH -->
-    <input id="search" placeholder="Search Google or enter URL...">
-
+  <!-- LOGO (click = menu) -->
+  <div class="logo" id="logoBtn">
+    <span class="mas">MAS</span><span class="rama">RAMA</span>
   </div>
 
-  <!-- 🔥 MAIN VIEW -->
-  <div class="view">
+  <!-- MENU DROPDOWN -->
+  <div class="menu" id="menu">
+    <div>History</div>
+    <div>Bookmarks</div>
+    <div>Appearance</div>
+    <div class="loginRow">
+      <img src="assets/login.png" class="loginIcon">
+      <span>Login</span>
+    </div>
+  </div>
 
-    <!-- HOME DASH -->
-    <div class="dashboard" id="home">
+  <!-- TABS -->
+  <div class="tabs" id="tabs"></div>
 
-      <div class="timeBlock">
-        <div class="timeWrap">
-          <div class="time" id="time"></div>
-          <div class="ampm" id="ampm"></div>
-        </div>
+  <!-- SEARCH / NAV -->
+  <div class="nav">
+    <button>←</button>
+    <button>→</button>
+    <button>⟳</button>
 
-        <div class="greeting">Good Morning, <span>Explorer</span></div>
-        <div class="date" id="date"></div>
+    <input id="search" placeholder="Search Google or enter URL...">
 
-        <div class="divider">
-          <span></span>
-          <div class="dot"></div>
-          <span></span>
-        </div>
-      </div>
+    <!-- LOGIN ICON (top right) -->
+    <img src="assets/login.png" class="topLogin">
+  </div>
 
-      <div class="searchBox">
-        <input placeholder="Search Google or enter a URL...">
-      </div>
+</div>
 
+<!-- ================= DASHBOARD ================= -->
+<div class="dashboard">
+
+  <!-- CLOCK -->
+  <div class="timeBlock">
+    <div class="timeWrap">
+      <div class="time" id="time"></div>
+      <div class="ampm" id="ampm"></div>
     </div>
 
-    <!-- 🔥 BROWSER FRAME -->
-    <iframe id="frame"></iframe>
+    <div class="greeting">Good Morning, <span>Explorer</span></div>
+    <div class="date" id="date"></div>
 
+    <div class="line"></div>
+  </div>
+
+  <!-- SEARCH -->
+  <div class="searchBox">
+    <input placeholder="Search Google or enter a URL...">
   </div>
 
 </div>
