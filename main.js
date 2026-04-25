@@ -8,28 +8,21 @@ function updateClock() {
   let m = now.getMinutes().toString().padStart(2, "0");
 
   const ampm = h >= 12 ? "PM" : "AM";
-
   h = h % 12 || 12;
 
-  const timeEl = document.getElementById("time");
-  const ampmEl = document.getElementById("ampm");
-  const dateEl = document.getElementById("date");
+  document.getElementById("time").textContent = `${h}:${m}`;
+  document.getElementById("ampm").textContent = ampm;
 
-  if (timeEl) timeEl.textContent = `${h}:${m}`;
-  if (ampmEl) ampmEl.textContent = ampm;
-
-  if (dateEl) {
-    dateEl.textContent = now.toLocaleDateString(undefined, {
+  document.getElementById("date").textContent =
+    now.toLocaleDateString(undefined, {
       weekday: "long",
       month: "long",
       day: "numeric"
     });
-  }
 }
 
 function startClock() {
   updateClock();
-
   const delay = 60000 - (Date.now() % 60000);
 
   setTimeout(() => {
@@ -41,7 +34,7 @@ startClock();
 
 
 /* =========================
-   TABS (UNCHANGED CORE)
+   TABS (CLEAN + STABLE)
 ========================= */
 let tabs = [{ title: "New Tab", url: "https://google.com" }];
 let current = 0;
@@ -57,7 +50,7 @@ function renderTabs() {
     tab.className = "tab" + (i === current ? " active" : "");
 
     tab.innerHTML = `
-      <span class="tabTitle">${t.title}</span>
+      <span>${t.title}</span>
       <span class="tabClose">×</span>
     `;
 
@@ -103,8 +96,9 @@ renderTabs();
 ========================= */
 function go() {
   const input = document.getElementById("search");
-  let val = input.value.trim();
+  if (!input) return;
 
+  let val = input.value.trim();
   if (!val) return;
 
   let url;
@@ -122,7 +116,7 @@ function go() {
 
 
 /* =========================
-   MASRAMA MENU (CLEAN)
+   MASRAMA MENU (REAL SYSTEM)
 ========================= */
 function toggleHistory() {
   let existing = document.getElementById("masramaMenu");
@@ -136,11 +130,15 @@ function toggleHistory() {
   menu.id = "masramaMenu";
 
   menu.innerHTML = `
-    <div class="menuItem">History</div>
-    <div class="menuItem">Bookmarks</div>
-    <div class="menuItem">Appearance</div>
-    <div class="menuItem">Settings</div>
-    <div class="menuItem login">🔐 Login</div>
+    <div class="menuItem" onclick="openPanel('history')">History</div>
+    <div class="menuItem" onclick="openPanel('bookmarks')">Bookmarks</div>
+    <div class="menuItem" onclick="openPanel('appearance')">Appearance</div>
+    <div class="menuItem" onclick="openPanel('settings')">Settings</div>
+
+    <div class="menuItem loginRow" onclick="openPanel('login')">
+      <img src="assets/user.png" class="loginIcon">
+      Login
+    </div>
   `;
 
   document.body.appendChild(menu);
@@ -148,3 +146,78 @@ function toggleHistory() {
   menu.style.top = "55px";
   menu.style.left = "20px";
 }
+
+
+/* =========================
+   PANEL SYSTEM (NEW)
+========================= */
+function openPanel(type) {
+  removePanel();
+
+  const panel = document.createElement("div");
+  panel.id = "panel";
+
+  let content = "";
+
+  if (type === "history") {
+    content = `
+      <h3>History</h3>
+      <p>No history yet...</p>
+    `;
+  }
+
+  if (type === "bookmarks") {
+    content = `
+      <h3>Bookmarks</h3>
+      <p>No bookmarks saved.</p>
+    `;
+  }
+
+  if (type === "appearance") {
+    content = `
+      <h3>Appearance</h3>
+      <p>Theme: GX Dark</p>
+    `;
+  }
+
+  if (type === "settings") {
+    content = `
+      <h3>Settings</h3>
+      <p>More controls coming soon.</p>
+    `;
+  }
+
+  if (type === "login") {
+    content = `
+      <h3>Login</h3>
+      <p>Connect your account.</p>
+    `;
+  }
+
+  panel.innerHTML = `
+    <div class="panelHeader">
+      <span>${type.toUpperCase()}</span>
+      <span onclick="removePanel()" style="cursor:pointer">×</span>
+    </div>
+    <div class="panelContent">${content}</div>
+  `;
+
+  document.body.appendChild(panel);
+}
+
+
+/* REMOVE PANEL */
+function removePanel() {
+  const existing = document.getElementById("panel");
+  if (existing) existing.remove();
+}
+
+
+/* CLICK OUTSIDE CLOSE */
+document.addEventListener("click", (e) => {
+  const menu = document.getElementById("masramaMenu");
+
+  if (menu && !menu.contains(e.target) && !e.target.classList.contains("logo")) {
+    menu.remove();
+  }
+});
