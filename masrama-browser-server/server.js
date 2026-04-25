@@ -11,14 +11,18 @@ let page;
 
 /* START BROWSER */
 async function startBrowser() {
-  browser = await chromium.launch({
-    headless: true
-  });
+  try {
+    browser = await chromium.launch({
+      headless: true
+    });
 
-  const context = await browser.newContext();
-  page = await context.newPage();
+    const context = await browser.newContext();
+    page = await context.newPage();
 
-  console.log("🔥 Browser started");
+    console.log("🔥 Browser started");
+  } catch (err) {
+    console.error("❌ Failed to start browser:", err);
+  }
 }
 
 startBrowser();
@@ -34,6 +38,7 @@ app.post("/load", async (req, res) => {
 
     res.json({ html });
   } catch (err) {
+    console.error(err);
     res.json({ error: "Failed to load page" });
   }
 });
