@@ -901,3 +901,62 @@ iframe{
   border:none;
   border-radius:12px;
 }
+
+/* PANEL SYSTEM */
+#panel {
+  position: fixed;
+  top: 80px;
+  left: 20px;
+
+  width: 260px;
+  padding: 12px;
+
+  background: rgba(20,10,30,0.95);
+  backdrop-filter: blur(14px);
+
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.08);
+
+  z-index: 9999;
+
+  animation: fadeIn 0.2s ease;
+}
+
+.panelHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+
+  color: #ff2fd1;
+  font-weight: 600;
+}
+
+.panelContent {
+  font-size: 13px;
+  color: #aaa;
+}
+
+/* LOGIN ICON */
+.loginIcon {
+  width: 18px;
+  height: 18px;
+}
+
+/* MENU LOGIN ROW */
+.loginRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* FADE */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
