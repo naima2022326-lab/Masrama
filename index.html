@@ -23,7 +23,10 @@
   </div>
   
   <div id="browserView" class="browserView" style="display:none;">
-    <iframe id="webFrame" src=""></iframe>
+    <iframe id="webFrame" 
+            sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-presentation" 
+            allow="autoplay; encrypted-media; fullscreen"
+            src=""></iframe>
   </div>
   
   <div class="dashboard" id="dashboard">
@@ -44,8 +47,8 @@
     </div>
 
     <div class="apps">
-      <div class="appItem" onclick="loadSite('https://www.opera.com/gx')">🎮<span>Opera GX</span></div>
-      <div class="appItem" onclick="loadSite('https://www.youtube.com/embed/tgbNymZ7vqY')">▶<span>YouTube</span></div>
+      <div class="appItem" onclick="loadSite('https://www.bing.com')">🌐<span>Bing</span></div>
+      <div class="appItem" onclick="loadSite('https://www.youtube.com/embed')">▶<span>YouTube</span></div>
       <div class="appItem" onclick="loadSite('https://github.com')">🐙<span>GitHub</span></div>
       <div class="appItem" onclick="loadSite('https://www.reddit.com')">🔥<span>Reddit</span></div>
       <div class="appItem" onclick="loadSite('https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM3M')">🎵<span>Spotify</span></div>
@@ -55,11 +58,6 @@
     <div class="quick">
       <div class="quickTitle">🌐 QUICK ACCESS</div>
       <div class="cards">
-        <div class="card" onclick="loadSite('https://www.opera.com/gx')">
-          <div class="cardTop"><span>🎮 Opera GX</span><span class="open">↗</span></div>
-          <div class="tag">BROWSER</div>
-          <p>The gaming browser — CPU & RAM tools built in.</p>
-        </div>
         <div class="card" onclick="loadSite('https://www.bing.com/trending')">
           <div class="cardTop"><span>📈 Trending</span><span class="open">↗</span></div>
           <div class="tag">TRENDS</div>
