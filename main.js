@@ -1,12 +1,13 @@
-// Function to update the clock
+// 1. CLOCK LOGIC
 function updateClock() {
     const now = new Date();
     let h = now.getHours();
     let m = now.getMinutes().toString().padStart(2, "0");
     const ampm = h >= 12 ? "PM" : "AM";
     h = h % 12 || 12;
-    if(document.getElementById("time")) {
-        document.getElementById("time").textContent = `${h}:${m}`;
+    const timeEl = document.getElementById("time");
+    if(timeEl) {
+        timeEl.textContent = `${h}:${m}`;
         document.getElementById("ampm").textContent = ampm;
         document.getElementById("date").textContent = now.toLocaleDateString(undefined, {
             weekday: "long", month: "long", day: "numeric"
@@ -16,43 +17,43 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-// The Master Search Function
+// 2. SEARCH & NAVIGATION LOGIC
 function go(inputId) {
-    const inputField = document.getElementById(inputId);
-    const val = inputField.value.trim();
-    
-    if (val !== "") {
-        let finalUrl;
-        if (val.startsWith("http://") || val.startsWith("https://")) {
-            finalUrl = val;
-        } else if (val.includes(".") && !val.includes(" ")) {
-            finalUrl = "https://" + val;
-        } else {
-            // DuckDuckGo allows iframes!
-            finalUrl = "https://duckduckgo.com/?q=" + encodeURIComponent(val);
-        }
-        loadSite(finalUrl);
+    const input = document.getElementById(inputId);
+    let val = input.value.trim();
+    if (!val) return;
+
+    let url;
+    if (val.startsWith("http")) {
+        url = val;
+    } else if (val.includes(".")) {
+        url = "https://" + val;
+    } else {
+        // Bing is the engine because it works in iframes!
+        url = "https://www.bing.com/search?q=" + encodeURIComponent(val);
     }
+    loadSite(url);
 }
 
-// The function that swaps the view
 function loadSite(url) {
-    const dash = document.getElementById("dashboard");
-    const browser = document.getElementById("browserView");
-    const frame = document.getElementById("webFrame");
-    
-    if (dash && browser && frame) {
-        dash.style.display = "none";
-        browser.style.display = "block";
-        frame.src = url;
-        // Keep the top search bar updated with the URL
-        document.getElementById("search").value = url;
+    const dashboard = document.getElementById("dashboard");
+    const browserView = document.getElementById("browserView");
+    const webFrame = document.getElementById("webFrame");
+    const topSearch = document.getElementById("search");
+
+    if(dashboard && browserView) {
+        dashboard.style.display = "none";
+        browserView.style.display = "block";
+        webFrame.src = url;
+        topSearch.value = url;
     }
 }
 
-// Function to go back to the Dashboard
+// 3. HOME BUTTON (Logo Click)
 function goHome() {
     document.getElementById("dashboard").style.display = "block";
     document.getElementById("browserView").style.display = "none";
     document.getElementById("webFrame").src = "";
+    document.getElementById("search").value = "";
+    document.getElementById("centerSearch").value = "";
 }
