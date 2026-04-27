@@ -1,144 +1,79 @@
-/* =========================
-   CORE STYLES
-========================= */
-* { 
-  margin: 0; 
-  padding: 0; 
-  box-sizing: border-box; 
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
   font-family: 'Inter', sans-serif;
   background: radial-gradient(circle at top, #1a0f25, #05060d 70%);
   color: #fff;
+  overflow-x: hidden;
   height: 100vh;
-  overflow: hidden; /* Keeps the site from scrolling weirdly */
 }
 
-/* =========================
-   TOP BAR (Navigation)
-========================= */
+/* TOP BAR */
 .topbar {
-  display: flex; 
-  align-items: center; 
-  justify-content: space-between;
-  padding: 10px 20px; 
-  background: rgba(10, 10, 20, 0.8);
-  backdrop-filter: blur(12px); 
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  position: relative;
-  z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 20px; background: rgba(10, 10, 20, 0.6);
+  backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);
+  position: sticky; top: 0; z-index: 100;
 }
 
-.logo { 
-  font-family: 'Orbitron'; 
-  font-weight: 700; 
-  letter-spacing: 2px; 
-  color: #9b4dff; 
-  cursor: pointer; 
-}
+.logo { font-weight: 700; letter-spacing: 2px; color: #9b4dff; cursor: pointer; font-family: 'Orbitron'; }
 .logo span { color: #ff2fd1; }
 
-.nav { 
-  display: flex; 
-  align-items: center; 
-  gap: 10px; 
-  flex: 1; 
-  justify-content: flex-end; 
-}
-
+.nav { display: flex; align-items: center; gap: 8px; flex: 1; justify-content: flex-end; }
 .nav input {
-  width: 300px; 
-  padding: 8px 15px; 
-  border-radius: 20px;
-  border: none; 
-  background: rgba(255,255,255,0.1); 
-  color: #fff; 
-  outline: none;
-  transition: 0.3s;
+  width: 250px; padding: 8px 15px; background: rgba(255,255,255,0.05);
+  border: none; border-radius: 20px; color: #fff; outline: none; transition: 0.3s;
+}
+.nav input:focus { box-shadow: 0 0 12px rgba(255,0,200,0.4); }
+.navBtn { background: transparent; border: none; color: #aaa; cursor: pointer; font-size: 16px; }
+
+/* BROWSER VIEW */
+.browserView {
+  position: fixed; top: 55px; left: 0; width: 100%; height: calc(100vh - 55px);
+  background: #000; z-index: 50;
+}
+#webFrame { width: 100%; height: 100%; border: none; }
+
+/* DASHBOARD */
+.dashboard { text-align: center; padding-top: 60px; transition: 0.3s; }
+
+.time {
+  font-family: 'Orbitron', sans-serif; font-size: 90px; font-weight: 700;
+  background: linear-gradient(90deg, #ff2fd1, #9b4dff);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 20px rgba(255, 0, 200, 0.6);
 }
 
-.nav input:focus {
-  background: rgba(255,255,255,0.2);
-  box-shadow: 0 0 10px rgba(255, 47, 209, 0.5);
-}
+.timeWrap { position: relative; display: inline-block; }
+.ampm { position: absolute; top: 10px; right: -30px; font-size: 14px; color: #ff2fd1; font-family: 'Orbitron'; }
 
-.navBtn {
-  background: transparent;
-  border: none;
-  color: #aaa;
-  font-size: 18px;
-  cursor: pointer;
-}
+.greeting { font-size: 18px; color: #aaa; margin-top: 10px; }
+.greeting span { color: #ff2fd1; font-weight: 600; }
 
-/* =========================
-   DASHBOARD (The Home Screen)
-======================== */
-.dashboard { 
-  text-align: center; 
-  padding-top: 80px; 
-  display: block; /* Shown by default */
-}
-
-.time { 
-  font-family: 'Orbitron'; 
-  font-size: 90px; 
-  background: linear-gradient(90deg, #ff2fd1, #9b4dff); 
-  -webkit-background-clip: text; 
-  -webkit-text-fill-color: transparent; 
-  font-weight: 700;
-}
+.divider { display: flex; align-items: center; justify-content: center; margin: 15px 0; gap: 10px; }
+.divider span { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, #ff2fd1, transparent); }
+.dot { width: 6px; height: 6px; background: #ff2fd1; border-radius: 50%; }
 
 .searchBox input {
-  margin-top: 30px; 
-  width: 500px; 
-  padding: 15px 25px; 
-  border-radius: 30px;
-  border: 1px solid rgba(255,255,255,0.1); 
-  background: rgba(255,255,255,0.07); 
-  color: #fff; 
-  outline: none;
-  font-size: 16px;
-  backdrop-filter: blur(10px);
+  margin-top: 25px; width: 450px; padding: 14px; border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05);
+  color: #fff; outline: none; backdrop-filter: blur(10px);
 }
 
-/* =========================
-   BROWSER VIEW (The Iframe)
-========================= */
-.browserView {
-  position: absolute; 
-  top: 60px; /* Sits right under the topbar */
-  left: 0; 
-  width: 100%; 
-  height: calc(100vh - 60px);
-  background: #000; 
-  z-index: 10;
-  display: none; /* Hidden until search is used */
-}
+.apps { margin-top: 40px; display: flex; justify-content: center; gap: 30px; }
+.appItem { text-align: center; color: #aaa; cursor: pointer; transition: 0.2s; }
+.appItem span { display: block; font-size: 12px; margin-top: 5px; }
+.appItem:hover { color: #fff; transform: translateY(-3px); text-shadow: 0 0 10px #ff2fd1; }
 
-#webFrame { 
-  width: 100%; 
-  height: 100%; 
-  border: none; 
+.quickTitle { color: #ff2fd1; margin: 40px 0 20px; font-size: 14px; letter-spacing: 2px; }
+.cards { display: grid; grid-template-columns: repeat(2, 280px); gap: 20px; justify-content: center; }
+.card {
+  padding: 20px; border-radius: 12px; background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(10px); transition: 0.3s; text-align: left; cursor: pointer;
 }
+.card:hover { transform: translateY(-5px); box-shadow: 0 0 20px rgba(255,0,200,0.3); }
+.cardTop { display: flex; justify-content: space-between; font-weight: bold; }
+.tag { font-size: 10px; color: #ff2fd1; margin: 5px 0; font-weight: 600; }
+.card p { font-size: 12px; color: #888; line-height: 1.4; }
 
-/* =========================
-   APPS & CARDS
-========================= */
-.apps {
-  margin-top: 40px;
-  display: flex;
-  justify-content: center;
-  gap: 25px;
-}
-
-.appItem {
-  cursor: pointer;
-  transition: 0.3s;
-  color: #aaa;
-}
-
-.appItem:hover {
-  color: #ff2fd1;
-  transform: translateY(-5px);
-}
+.footer { margin-top: 50px; color: #444; font-size: 12px; padding-bottom: 20px; }
