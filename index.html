@@ -12,17 +12,13 @@
 <div class="app">
 
   <div class="topbar">
-    <div class="logo" onclick="goHome()">
-      MAS<span>RAMA</span>
-    </div>
-
+    <div class="logo" onclick="goHome()">MAS<span>RAMA</span></div>
     <div class="tabs" id="tabs"></div>
-
     <div class="nav">
       <button class="navBtn" onclick="history.back()">←</button>
       <button class="navBtn" onclick="history.forward()">→</button>
-      <button class="navBtn" onclick="reloadFrame()">⟳</button>
-      <input id="search" placeholder="Search or enter URL..." onkeydown="if(event.key==='Enter') go('search')">
+      <button class="navBtn" onclick="location.reload()">⟳</button>
+      <input id="search" placeholder="Search Bing or enter URL..." onkeydown="if(event.key==='Enter') go('search')">
     </div>
   </div>
   
@@ -37,34 +33,22 @@
         <div class="time" id="time"></div>
         <div class="ampm" id="ampm"></div>
       </div>
-      
-      <div class="greeting">
-        Good Morning, <span>Explorer</span>
-      </div>
-
+      <div class="greeting">Good Morning, <span>Explorer</span></div>
       <div class="date" id="date"></div>
-
-      <div class="divider">
-        <span></span>
-        <div class="dot"></div>
-        <span></span>
-      </div>
-
-      <div class="thanks">
-        Thank you Muna Jama & Nasra Diriye — special thanks to Naima Mohamed
-      </div>
+      <div class="divider"><span></span><div class="dot"></div><span></span></div>
+      <div class="thanks">Thank you Muna Jama & Nasra Diriye — special thanks to Naima Mohamed</div>
     </div>
 
     <div class="searchBox">
-      <input id="centerSearch" placeholder="Search or enter a URL..." onkeydown="if(event.key==='Enter') go('centerSearch')">
+      <input id="centerSearch" placeholder="Search Bing or enter a URL..." onkeydown="if(event.key==='Enter') go('centerSearch')">
     </div>
 
     <div class="apps">
       <div class="appItem" onclick="loadSite('https://www.opera.com/gx')">🎮<span>Opera GX</span></div>
-      <div class="appItem" onclick="loadSite('https://www.youtube.com/embed')">▶<span>YouTube</span></div>
+      <div class="appItem" onclick="loadSite('https://www.youtube.com/embed/tgbNymZ7vqY')">▶<span>YouTube</span></div>
       <div class="appItem" onclick="loadSite('https://github.com')">🐙<span>GitHub</span></div>
       <div class="appItem" onclick="loadSite('https://www.reddit.com')">🔥<span>Reddit</span></div>
-      <div class="appItem" onclick="loadSite('https://open.spotify.com/embed')">🎵<span>Spotify</span></div>
+      <div class="appItem" onclick="loadSite('https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM3M')">🎵<span>Spotify</span></div>
       <div class="appItem" onclick="loadSite('https://codepen.io')">💻<span>CodePen</span></div>
     </div>
 
@@ -72,37 +56,22 @@
       <div class="quickTitle">🌐 QUICK ACCESS</div>
       <div class="cards">
         <div class="card" onclick="loadSite('https://www.opera.com/gx')">
-          <div class="cardTop">
-            <span>🎮 Opera GX</span>
-            <span class="open">↗</span>
-          </div>
+          <div class="cardTop"><span>🎮 Opera GX</span><span class="open">↗</span></div>
           <div class="tag">BROWSER</div>
           <p>The gaming browser — CPU & RAM tools built in.</p>
         </div>
-
-        <div class="card" onclick="loadSite('https://trends.google.com')">
-          <div class="cardTop">
-            <span>📈 Trending</span>
-            <span class="open">↗</span>
-          </div>
+        <div class="card" onclick="loadSite('https://www.bing.com/trending')">
+          <div class="cardTop"><span>📈 Trending</span><span class="open">↗</span></div>
           <div class="tag">TRENDS</div>
           <p>Live trending searches across the internet.</p>
         </div>
-
         <div class="card" onclick="loadSite('https://news.ycombinator.com')">
-          <div class="cardTop">
-            <span>📰 Hacker News</span>
-            <span class="open">↗</span>
-          </div>
+          <div class="cardTop"><span>📰 Hacker News</span><span class="open">↗</span></div>
           <div class="tag">NEWS</div>
           <p>Top tech and startup stories.</p>
         </div>
-
         <div class="card" onclick="loadSite('https://www.speedtest.net')">
-          <div class="cardTop">
-            <span>⚡ Speed Test</span>
-            <span class="open">↗</span>
-          </div>
+          <div class="cardTop"><span>⚡ Speed Test</span><span class="open">↗</span></div>
           <div class="tag">TOOLS</div>
           <p>Check your internet speed instantly.</p>
         </div>
@@ -111,6 +80,7 @@
 
     <div class="footer">POWERED BY MASRAMA</div>
   </div>
+
 </div>
 
 <script src="main.js"></script>
