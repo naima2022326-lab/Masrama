@@ -29,7 +29,7 @@ function go(inputId) {
     } else if (val.includes(".")) {
         url = "https://" + val;
     } else {
-        // Bing is the engine because it works in iframes!
+        // Bing works best for staying inside the window
         url = "https://www.bing.com/search?q=" + encodeURIComponent(val);
     }
     loadSite(url);
