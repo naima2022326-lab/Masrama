@@ -1,4 +1,4 @@
-// 1. CLOCK LOGIC
+// CLOCK
 function updateClock() {
     const now = new Date();
     let h = now.getHours();
@@ -12,7 +12,7 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-// 2. SEARCH & BROWSER LOGIC
+// SEARCH LOGIC
 function go(inputId) {
     const input = document.getElementById(inputId);
     let val = input.value.trim();
@@ -24,40 +24,28 @@ function go(inputId) {
     } else if (val.includes(".")) {
         url = "https://" + val;
     } else {
-        // Using Bing because Google blocks iframes. This makes your site "work" like a browser.
+        // Bing is used as the engine because Google blocks itself in iframes
         url = "https://www.bing.com/search?q=" + encodeURIComponent(val);
     }
-
-    loadUrl(url);
+    loadSite(url);
 }
 
-function loadUrl(url) {
-    const dashboard = document.getElementById("dashboard");
+function loadSite(url) {
+    const dashboard = document.getElementById("mainDashboard");
     const browserView = document.getElementById("browserView");
     const iframe = document.getElementById("webFrame");
-    const topSearch = document.getElementById("search");
+    const topInput = document.getElementById("search");
 
-    // Show the browser, hide the dashboard
     dashboard.style.display = "none";
     browserView.style.display = "block";
     iframe.src = url;
-    topSearch.value = url; // Update top bar to show the URL
+    topInput.value = url;
 }
 
-// 3. NAV FUNCTIONS
-function reloadFrame() {
-    document.getElementById("webFrame").src += "";
-}
-
-function goBack() {
-    // Note: This only works if the site in the iframe allows history access
-    window.history.back();
-}
-
-// 4. RETURN TO DASHBOARD (Click Logo)
-function toggleHistory() {
-    const dashboard = document.getElementById("dashboard");
-    const browserView = document.getElementById("browserView");
-    dashboard.style.display = "block";
-    browserView.style.display = "none";
+// HOME BUTTON (Logo)
+function goHome() {
+    document.getElementById("mainDashboard").style.display = "block";
+    document.getElementById("browserView").style.display = "none";
+    document.getElementById("webFrame").src = "";
+    document.getElementById("search").value = "";
 }
