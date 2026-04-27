@@ -221,3 +221,16 @@ document.addEventListener("click", (e) => {
     menu.remove();
   }
 });
+
+
+document.getElementById("search").addEventListener("keydown", function(e) {
+  if (e.key === "Enter") {
+    let val = this.value;
+
+    if (!val.startsWith("http") && !val.includes(".")) {
+      val = "https://www.google.com/search?q=" + encodeURIComponent(val);
+    }
+
+    window.open(val, "_blank");
+  }
+});
