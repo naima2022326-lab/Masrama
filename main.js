@@ -1,5 +1,5 @@
 /* =========================
-   CLOCK (CLEAN + AM/PM)
+   CLOCK
 ========================= */
 function updateClock() {
     const now = new Date();
@@ -26,7 +26,7 @@ updateClock();
 
 
 /* =========================
-   TABS (REAL BEHAVIOR)
+   TABS (REAL)
 ========================= */
 let tabs = [{ title: "New Tab", url: "" }];
 let current = 0;
@@ -40,14 +40,15 @@ function renderTabs() {
         tab.className = "tab" + (i === current ? " active" : "");
 
         tab.innerHTML = `
-            <span>${t.title}</span>
-            <span class="tabClose">×</span>
+          ${t.title || "New Tab"}
+          <span class="tabClose">×</span>
         `;
 
         tab.onclick = (e) => {
             if (e.target.classList.contains("tabClose")) return;
+
             current = i;
-            loadSite(tabs[i].url);
+            loadSite(t.url);
             renderTabs();
         };
 
@@ -85,7 +86,7 @@ renderTabs();
 
 
 /* =========================
-   SEARCH (FORCED EMBED)
+   SEARCH (SMART)
 ========================= */
 function go(inputId) {
     const input = document.getElementById(inputId);
@@ -100,7 +101,6 @@ function go(inputId) {
     } else if (val.includes(".")) {
         url = "https://" + val;
     } else {
-        // 🔥 Use Bing (works best inside iframe)
         url = "https://www.bing.com/search?q=" + encodeURIComponent(val);
     }
 
@@ -109,44 +109,52 @@ function go(inputId) {
 
 
 /* =========================
-   LOAD SITE (LOCKED MODE)
+   LOAD SITE (LOCKED)
 ========================= */
 function loadSite(url) {
     const dashboard = document.getElementById("dashboard");
     const browserView = document.getElementById("browserView");
     const webFrame = document.getElementById("webFrame");
+    const search = document.getElementById("search");
+
+    if (!url) {
+        goHome();
+        return;
+    }
 
     dashboard.style.display = "none";
     browserView.style.display = "block";
 
     webFrame.src = url;
+    search.value = url;
 
-    // 🔥 FORCE LINKS TO STAY INSIDE
+    tabs[current].url = url;
+    tabs[current].title = getTitleFromURL(url);
+
+    renderTabs();
+
+    /* try to keep navigation inside */
     webFrame.onload = () => {
         try {
-            const doc = webFrame.contentDocument || webFrame.contentWindow.document;
-
+            const doc = webFrame.contentDocument;
             const links = doc.querySelectorAll("a");
 
             links.forEach(link => {
-                link.setAttribute("target", "_self");
-
                 link.onclick = (e) => {
                     e.preventDefault();
-                    let href = link.href;
-                    if (href) loadSite(href);
+                    if (link.href) loadSite(link.href);
                 };
             });
 
-        } catch (err) {
-            // 🔒 Some sites block access (normal)
+        } catch {
+            // blocked = normal
         }
     };
 }
 
 
 /* =========================
-   OPEN IN TAB
+   TAB HELPER
 ========================= */
 function openInTab(url, title) {
     tabs[current] = {
@@ -155,7 +163,18 @@ function openInTab(url, title) {
     };
 
     loadSite(url);
-    renderTabs();
+}
+
+
+/* =========================
+   URL TITLE CLEANER
+========================= */
+function getTitleFromURL(url) {
+    try {
+        return new URL(url).hostname.replace("www.", "");
+    } catch {
+        return "New Tab";
+    }
 }
 
 
