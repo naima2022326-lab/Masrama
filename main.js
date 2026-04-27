@@ -1,4 +1,4 @@
-// CLOCK
+// 1. CLOCK LOGIC
 function updateClock() {
     const now = new Date();
     let h = now.getHours();
@@ -7,12 +7,14 @@ function updateClock() {
     h = h % 12 || 12;
     document.getElementById("time").textContent = `${h}:${m}`;
     document.getElementById("ampm").textContent = ampm;
-    document.getElementById("date").textContent = now.toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" });
+    document.getElementById("date").textContent = now.toLocaleDateString(undefined, {
+        weekday: "long", month: "long", day: "numeric"
+    });
 }
 setInterval(updateClock, 1000);
 updateClock();
 
-// SEARCH LOGIC
+// 2. SEARCH & NAVIGATION LOGIC
 function go(inputId) {
     const input = document.getElementById(inputId);
     let val = input.value.trim();
@@ -24,28 +26,38 @@ function go(inputId) {
     } else if (val.includes(".")) {
         url = "https://" + val;
     } else {
-        // Bing is used as the engine because Google blocks itself in iframes
-        url = "https://www.bing.com/search?q=" + encodeURIComponent(val);
+        // DuckDuckGo is used because it allows embedding in iframes
+        url = "https://duckduckgo.com/?q=" + encodeURIComponent(val);
     }
     loadSite(url);
 }
 
 function loadSite(url) {
-    const dashboard = document.getElementById("mainDashboard");
+    const dashboard = document.getElementById("dashboard");
     const browserView = document.getElementById("browserView");
-    const iframe = document.getElementById("webFrame");
-    const topInput = document.getElementById("search");
+    const webFrame = document.getElementById("webFrame");
+    const topSearch = document.getElementById("search");
 
+    // Show the iframe, hide the main dashboard
     dashboard.style.display = "none";
     browserView.style.display = "block";
-    iframe.src = url;
-    topInput.value = url;
+    
+    // Load the URL
+    webFrame.src = url;
+    topSearch.value = url;
 }
 
-// HOME BUTTON (Logo)
+// 3. HOME BUTTON (Clicking Logo)
 function goHome() {
-    document.getElementById("mainDashboard").style.display = "block";
+    document.getElementById("dashboard").style.display = "block";
     document.getElementById("browserView").style.display = "none";
     document.getElementById("webFrame").src = "";
     document.getElementById("search").value = "";
+    document.getElementById("centerSearch").value = "";
+}
+
+// 4. RELOAD FRAME
+function reloadFrame() {
+    const frame = document.getElementById("webFrame");
+    frame.src = frame.src;
 }
