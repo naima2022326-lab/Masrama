@@ -981,3 +981,23 @@ iframe{
   border: none;
   background: #000;
 }
+
+.gsc-control-cse {
+  background: transparent !important;
+  border: none !important;
+}
+
+.gsc-search-box {
+  background: rgba(255,255,255,0.05) !important;
+  border-radius: 20px !important;
+  padding: 10px !important;
+  backdrop-filter: blur(10px);
+}
+
+.gsc-input {
+  color: white !important;
+}
+
+.gsc-search-button {
+  border-radius: 10px !important;
+}
